@@ -5,9 +5,9 @@
         <meta http-equiv="X-UA-Compatible" count="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
-        <title>MyNews</title>
+        <title>edit Action</title>
     </head>
     <body>
-        <h1>Myニュース作成画面</h1>
+        <h1>edit Action</h1>
     </body>
 </html>
