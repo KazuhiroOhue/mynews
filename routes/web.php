@@ -15,12 +15,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'admin'], function() {
-    Route::get('news/create','Admin\NewsController@add')->middleware('auth');
-//12章課題２で追記
-    Route::get('profile/create','Admin\ProfileController@add')->middleware('auth');
-//12章課題３で追記
-    Route::get('profile/edit','Admin\ProfileController@edit')->middleware('auth');
+Route::group(['prefix' => 'admin', 'middleware'=> 'auth'], function() 
+{
+    Route::get('news/create','Admin\NewsController@add');
+    Route::post('news/create', 'Admin\NewsController@create');
+    Route::get('profile/create','Admin\ProfileController@add');
+//13章課題３で追記
+    Route::post('profile/create','Admin\ProfileController@create');
+    Route::get('profile/edit','Admin\ProfileController@edit');
+//13章課題６で追記
+    Route::post('profile/edit','Admin\ProfileController@update');
 });
 
 Auth::routes();
