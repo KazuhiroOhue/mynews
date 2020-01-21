@@ -31,9 +31,24 @@ class ProfileController extends Controller
         return redirect('admin/Profile/create');
     }
     
-    public function edit()
+    public function index(Request $request)
     {
-        return view('admin.profile.edit');
+        $cond_title = $request->cond_title;
+      if ($cond_title != '') {
+          // 検索されたら検索結果を取得する
+          $posts = Profile::where('title', $cond_title)->get();
+      } else {
+          // それ以外はすべてのニュースを取得する
+          $posts = Profile::all();
+      }
+        return view('admin.profile.index', ['posts' => $posts, 'cond_title' => $cond_title]);
+    }
+    
+    public function edit(Request $request)
+    {
+        //profiles_formを定義する
+        $profiles_form= Profile::find($request->id);
+        return view('admin.profile.edit',[ 'profiles_form'=>$profiles_form]);
     }
     
     public function update()
