@@ -5,6 +5,10 @@ use App\Http\Controllers\Controller;
 
 use App\Profile;
 
+use App\ProfileHistory;
+
+use Carbon\carbon;
+
 class ProfileController extends Controller
 {
     //
@@ -63,6 +67,11 @@ class ProfileController extends Controller
         // 該当するデータを上書きして保存する
         $profiles->fill($profiles_form)->save();
         
-        return redirect('admin/profile');
+        $profilehistory = new ProfileHistory;
+        $profilehistory->profile_id = $profiles->id;
+        $profilehistory->edited_at = Carbon::now();
+        $profilehistory->save();
+        
+        return redirect('admin/profile/');
     }
 }
